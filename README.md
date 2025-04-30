@@ -6,6 +6,10 @@ usermode-L2-L3-firewall
 
 ![screen.png](screen.png)
 
+# 구조도
+
+![screen4.png](screen4.png)
+
 # 원리
 
 ```
