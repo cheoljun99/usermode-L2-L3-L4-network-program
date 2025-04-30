@@ -8,7 +8,7 @@ usermode-L2-L3-firewall
 
 # PC1 (외부 인터넷과 연결된 PC)
 
-![scree2.mp4](screen2.mp4)
+![scree2.gif](screen2.gif)
 
 # PC2 (외부 인터넷과 단절된 PC 및 PC1과 다이렉트 연결된 PC)
 
