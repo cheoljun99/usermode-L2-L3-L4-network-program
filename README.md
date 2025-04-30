@@ -12,4 +12,4 @@ usermode-L2-L3-firewall
 
 # PC2 (외부 인터넷과 단절된 PC 및 PC1과 다이렉트 연결된 PC)
 
-![screen3.mp4](screen3.mp4)
+![screen3.gif](screen3.gif)
