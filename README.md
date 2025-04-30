@@ -23,7 +23,7 @@ usermode-L2-L3-firewall
     → MAC 주소 수정
       Src MAC: A1
       Dst MAC: 공유기 MAC (G1)
-    → 공유기로 전송
+    → 공유기로 전송 (인터페이스 전환)
 
 [3] 공유기
     NAT 기록 생성
@@ -39,7 +39,7 @@ usermode-L2-L3-firewall
     → MAC 주소 수정
       Src MAC: B1
       Dst MAC: C1
-    → PC2에게 유선으로 전달
+    → PC2에게 유선으로 전달 (인터페이스 전환)
 
 [6] PC2 커널이 수신
     [1]에서 커널이 보낸 패킷에 대한 응답을 다시 커널이 수신
