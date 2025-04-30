@@ -13,7 +13,7 @@ usermode-L2-L3-firewall
     Src IP: 192.168.0.111
     Dst IP: 8.8.8.8
     Src MAC: C1
-    Dst MAC: B1 → 전달
+    Dst MAC: B1 → PC2 커널이 전달
 
 [2] PC1 유저모드 (pcap 수신)
     → MAC 주소 수정
@@ -35,9 +35,10 @@ usermode-L2-L3-firewall
     → MAC 주소 수정
       Src MAC: B1
       Dst MAC: C1
-    → PC2 유선으로 전달
+    → PC2에게 유선으로 전달
 
-[6] PC2 커널 수신
+[6] PC2 커널이 수신
+    [1]에서 커널이 보낸 패킷에 대한 응답을 다시 커널이 수신
     IP/Port 정보 일치 → 응답 처리 → 인터넷 되는 것처럼 동작
 
 [*] 공유기에 연결되어 있지않은
