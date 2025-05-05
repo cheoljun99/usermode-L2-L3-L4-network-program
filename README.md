@@ -1,6 +1,9 @@
 # usermode-L2-L3-firewall
 
-usermode-L2-L3-firewall (advanced version)
+usermode-L2-L3-firewall (Advanced version)
+
+# 이전 버전과 차이점
+PC1과 PC2의 IPv4 주소 대역이 달라도 작동 가능
 
 # 구조
 
