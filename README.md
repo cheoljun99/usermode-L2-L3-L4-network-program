@@ -5,7 +5,7 @@ usermode-L2-L3-firewall (Advanced version)
 # 이전 버전과 차이점
 
 1. PC1과 PC2의 IPv4 주소 대역이 상이해도 동작 가능
-2. 점보 프레임 혹은 패킷 offload 대비 가능
+2. 점보 프레임 혹은 패킷 offload 기술 대비 가능
 
 # 구조
 
