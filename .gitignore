@@ -34,6 +34,7 @@
 *.exe
 *.out
 *.app
+usermode_L2_L3_firewall
 
 # VSCode settings folder
 .vscode/
