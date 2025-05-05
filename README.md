@@ -7,7 +7,7 @@ usermode-L2-L3-firewall (advanced version)
 ```
 
        [ 인터넷 ] 
-                           ▲
+           ▲
            | (공인 IP → NAT 변환) 
        [ 공유기 ]  
            |     IP : 192.168.0.1
@@ -26,7 +26,7 @@ usermode-L2-L3-firewall (advanced version)
            │
       [ 랜선 다이렉트 연결 ]
            │
-                           ▼
+           ▼
     [ PC2의 NIC ]
     IP: 10.10.10.111
     MAC: C1:C1:C1:C1:C1:C1
