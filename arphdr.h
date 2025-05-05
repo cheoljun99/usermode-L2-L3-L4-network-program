@@ -23,9 +23,9 @@ struct ArpHdr final {
 	uint8_t pln() { return pln_;}
 	uint16_t op() { return ntohs(op_); }
 	Mac smac() { return smac_; }
-	Ip sip() { return ntohl(sip_); }
+	Ip sip() { return Ip(ntohl(sip_)); }
 	Mac tmac() { return tmac_; }
-	Ip tip() { return ntohl(tip_); }
+	Ip tip() { return Ip(ntohl(tip_)); }
 
 	// HardwareType(hrd_)
 	enum: uint16_t {
