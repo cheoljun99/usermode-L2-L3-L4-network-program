@@ -10,10 +10,14 @@
 #include <sys/socket.h>
 #include <net/if.h>
 #include <unistd.h>         
-#include <iomanip>
-#include <map>
+
 #include <thread>
 #include <mutex>
+
+#include <linux/ethtool.h>
+#include <linux/sockios.h>
+
+
 using namespace std;
 
 
@@ -38,37 +42,61 @@ typedef struct iface {
 #define PUBLIC_GATEWAY_IP_HARDCODE "192.168.0.1"
 #define PRIVATE_GATEWAY_IP_HARDCODE "192.168.0.111"
 
-IFACE * get_iface_IP_and_MAC(const char* ifname) {
-	printf("Get interface Ip and Mac\n");
+IFACE* get_iface_IP_and_MAC(const char* ifname) {
+    printf("Get interface IP and MAC, and disable offload features\n");
     struct ifreq s;
     int fd = socket(AF_INET, SOCK_DGRAM, IPPROTO_IP);
     if (fd < 0) {
-        printf("Failed to create socket\n");
+        perror("socket creation failed");
         return nullptr;
     }
+
     IFACE* iface = new IFACE;
-    strcpy(s.ifr_name, ifname);
+    strncpy(s.ifr_name, ifname, IFNAMSIZ - 1);
+
+    // MAC 주소 가져오기
     if (ioctl(fd, SIOCGIFHWADDR, &s) == 0) {
         unsigned char* mac = (unsigned char*)s.ifr_hwaddr.sa_data;
         iface->mac = Mac(mac);
-        printf("Network interface %s MAC: %s\n", ifname,std::string(iface->mac).c_str());
+        printf("Network interface %s MAC: %s\n", ifname, std::string(iface->mac).c_str());
     } else {
-        printf("Failed to get MAC address\n");
+        perror("Failed to get MAC address");
         close(fd);
         delete iface;
         return nullptr;
     }
 
+    // IP 주소 가져오기
     if (ioctl(fd, SIOCGIFADDR, &s) == 0) {
         struct sockaddr_in* ipaddr = (struct sockaddr_in*)&s.ifr_addr;
-        iface->ip = htonl((ipaddr->sin_addr.s_addr));
+        iface->ip = htonl(ipaddr->sin_addr.s_addr);
         printf("Network interface %s IP: %s\n", ifname, std::string(iface->ip).c_str());
     } else {
-        printf("Failed to get IP address\n");
+        perror("Failed to get IP address");
         close(fd);
         delete iface;
         return nullptr;
     }
+
+    // 오프로드 끄기 함수 정의
+    auto disable_offload = [&](__u32 cmd, const char* name) {
+        struct ethtool_value eval = {0};
+        struct ifreq ifr = {0};
+        strncpy(ifr.ifr_name, ifname, IFNAMSIZ - 1);
+        eval.cmd = cmd;
+        eval.data = 0;
+        ifr.ifr_data = (caddr_t)&eval;
+
+        if (ioctl(fd, SIOCETHTOOL, &ifr) < 0) {
+            fprintf(stderr, "Failed to disable %s on %s: %s\n", name, ifname, strerror(errno));
+        } else {
+            printf("Disabled %s on %s\n", name, ifname);
+        }
+    };
+
+    disable_offload(ETHTOOL_SGSO, "GSO");
+    disable_offload(ETHTOOL_SGRO, "GRO");
+
     close(fd);
     return iface;
 }
@@ -182,7 +210,7 @@ void monitor_iface_and_send_to_other_iface_loop_thread_func( pcap_t*receive_hand
 			std::lock_guard<std::mutex> lock(send_lock);
 			int res = pcap_sendpacket(send_handle, packet, header->len);
 			if (res != 0) {
-				fprintf(stderr, "pcap_sendpacket return %d error=%s\n", res, pcap_geterr(send_handle));
+				fprintf(stderr, "pcap_sendpacket return %d error=%s header->len=%d \n", res, pcap_geterr(send_handle),header->len);
 			}
 		}
 	}
@@ -222,7 +250,7 @@ void monitor_arp_and_send_arp_loop_thread_func( pcap_t*receive_handle, IFACE * r
 				std::lock_guard<std::mutex> lock(send_lock);
 				int res = pcap_sendpacket(receive_handle, reinterpret_cast<const u_char*>(&response_packet), sizeof(EthArpPacket));
 				if (res != 0) {
-					fprintf(stderr, "pcap_sendpacket return %d error=%s\n", res, pcap_geterr(receive_handle));
+					fprintf(stderr, "pcap_sendpacket return %d error=%s header->len=%d \n", res, pcap_geterr(receive_handle),header->len);
 					exit(-1);
 				}
 
@@ -237,7 +265,7 @@ void monitor_arp_and_send_arp_loop_thread_func( pcap_t*receive_handle, IFACE * r
 				std::lock_guard<std::mutex> lock(send_lock);		
 				int res = pcap_sendpacket(private_handle, packet, header->len);
 				if (res != 0) {
-					fprintf(stderr, "pcap_sendpacket return %d error=%s\n", res, pcap_geterr(private_handle));
+					fprintf(stderr, "pcap_sendpacket return %d error=%s header->len=%d \n", res, pcap_geterr(private_handle),header->len);
 				}
 			}
 		}
