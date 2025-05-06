@@ -5,7 +5,7 @@ usermode-L2-L3-firewall (Advanced version)
 # 이전 버전과 차이점
 
 1. PC1의 서로다른 NIC 두개의 IPv4 주소 대역이 서로 달라도 릴레이 가능하다.
-    즉, PC1의 인터넷망의 사설 IP 대역과 PC2의 폐쇄망의 사설 IP 대역이 달라도 작동 가능
+    즉, PC1의 인터넷망의 사설 IP 대역과 PC2 단독망의 사설 IP 대역이 달라도 작동 가능
 2. 점보 프레임 혹은 패킷 offload 기술 대비 가능
 
 # 구조
