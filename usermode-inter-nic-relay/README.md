@@ -1,6 +1,6 @@
-# usermode-L2-L3-nic-bridge
+# usermode-inter-nic-relay
 
-usermode-L2-L3-nic-bridge (Advanced version)
+usermode-inter-nic-relay (Advanced version)
 
 # 이전 버전과 차이점
 
