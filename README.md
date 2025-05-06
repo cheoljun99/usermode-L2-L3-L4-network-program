@@ -6,5 +6,4 @@
 
 서로 다른 NIC간 패킷을 전달하는 프로그램
 
-https://github.com/cheoljun99/usermode-L2-L3-network-program/tree/master/usermode-L2-L3-nic-bridge
 
