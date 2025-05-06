@@ -89,10 +89,10 @@ usermode-L2-L3-nic-bridge (Advanced version)
     → 패킷의 IP 변경으로 인한 IP & TCP/UDP 체크섬 수정 (악용의 소지가 있어 코드 비공개)
 ```
 
-# PC1 (외부 인터넷과 연결된 PC)
+# PC1 (인터넷 공유기와 연결된 PC)
 
 ![scree2.gif](screen2.gif)
 
-# PC2 (외부 인터넷과 단절된 PC)
+# PC2 (인터넷 공유기와 단절된 PC)
 
 ![screen3.gif](screen3.gif)
