@@ -378,7 +378,7 @@ void monitor_arp_and_send_arp_loop_thread_func( pcap_t*internet_iface_handle,
 
 int main() {
 
-	printf("Enter name of internet network interface : ");
+	printf("Enter internet network interface name : ");
 	char buf[100];
 	char internet_iface_name[100];
 	int ch;
@@ -397,7 +397,7 @@ int main() {
 		return -1;
 	}
 
-	printf("Enter name of isolated network interface : ");
+	printf("Enter isolated network interface name : ");
 	char isolated_iface_name[100];
 	if (fgets(buf, sizeof(buf), stdin) == NULL) {
 		printf("Input error\n");
@@ -442,7 +442,7 @@ int main() {
 
 	
 
-	printf("Enter gateway ip of internet network : ");
+	printf("Enter internet network gateway ip : ");
 	char internet_network_gateway_ip[100];
 	if (fgets(buf, sizeof(buf), stdin) == NULL) {
 		printf("Input error\n");
@@ -460,7 +460,7 @@ int main() {
 	}
 
 
-	printf("Enter target ip of isolated network : ");
+	printf("Enter isolated network target ip : ");
 	char isolated_network_target_ip[100];
 	if (fgets(buf, sizeof(buf), stdin) == NULL) {
 		printf("Input error\n");
@@ -477,7 +477,7 @@ int main() {
 		return -1;
 	}
 
-	printf("Enter fake ip of internet network (== arp spoofing ip) : ");
+	printf("Enter internet network fake ip (arp spoofing ip) : ");
 	char internet_network_fake_ip[100];
 	if (fgets(buf, sizeof(buf), stdin) == NULL) {
 		printf("Input error\n");
