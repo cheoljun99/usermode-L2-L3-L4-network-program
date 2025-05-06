@@ -93,6 +93,6 @@ usermode-L2-L3-nic-bridge (Advanced version)
 
 ![scree2.gif](screen2.gif)
 
-# PC2 (인터넷 공유기와 단절된 PC)
+# PC2 (인터넷 공유기와 연결되지 않은 PC)
 
 ![screen3.gif](screen3.gif)
