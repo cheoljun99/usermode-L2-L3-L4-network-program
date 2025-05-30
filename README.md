@@ -1,6 +1,6 @@
-# usermode-inter-nic-relay
+# inter-nic-relayer
 
-usermode-inter-nic-relay (Advanced version)
+inter-nic-relayer (Advanced version)
 
 # 이전 버전과 차이점
 
