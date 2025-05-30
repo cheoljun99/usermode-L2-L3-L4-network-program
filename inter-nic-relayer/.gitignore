@@ -46,4 +46,5 @@ source/checksum.cpp
 header/checksum.h
 object/
 study/
+
 # End of https://www.toptal.com/developers/gitignore/api/c++
