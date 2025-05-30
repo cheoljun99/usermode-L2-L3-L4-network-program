@@ -34,13 +34,16 @@
 *.exe
 *.out
 *.app
-usermode_L2_L3_firewall
+inter-nic-relay
 
 # VSCode settings folder
 .vscode/
 
-# Ignore checksum source files
+# Ignore source files
 checksum.h
 checksum.cpp
-
+source/checksum.cpp
+header/checksum.h
+object/
+study/
 # End of https://www.toptal.com/developers/gitignore/api/c++
